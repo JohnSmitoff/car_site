@@ -1,4 +1,6 @@
 from rest_framework import generics, response, status, exceptions
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsModerator
 
 from .models import Advert
 from accounts.models import Seller
@@ -42,21 +44,26 @@ class ListAds(generics.ListAPIView):
 class ListPendingAds(generics.ListAPIView):
     queryset = Advert.objects.all().filter(status="P")
     serializer_class = ListAdsSerializer
+    permission_classes = [IsAuthenticated, IsModerator]
 
 
 class ListRejectedAds(generics.ListAPIView):
     queryset = Advert.objects.all().filter(status="R")
     serializer_class = ListAdsSerializer
+    permission_classes = [IsAuthenticated, IsModerator]
 
 
 class ListExpiredAds(generics.ListAPIView):
     queryset = Advert.objects.all().filter(status="E")
     serializer_class = ListAdsSerializer
+    permission_classes = [IsAuthenticated, IsModerator]
 
 
 class StatusPartialUpdateView(generics.UpdateAPIView):
     queryset = Advert.objects.all()
     serializer_class = UpdateAdSerializer
+    permission_classes = [IsAuthenticated, IsModerator]
+    permission_classes = [IsAuthenticated, IsModerator]
 
 
 class CreateAd(generics.CreateAPIView):

@@ -21,6 +21,5 @@ urlpatterns = [
     path("api/v1/accounts/", include("accounts.urls")),
     path("api/v1/ads/", include("ads.urls")),
     path("api/v1/my_cars/", include("cars.urls")),
-    #path("api/v1/moderator/", include("accounts.urls"))
 ]
 
