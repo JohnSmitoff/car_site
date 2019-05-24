@@ -1,6 +1,6 @@
 from rest_framework import generics, response, status, exceptions
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsModerator
+from .permissions import IsModerator, IsSeller, IsOwnerAndPending
 
 from .models import Advert
 from accounts.models import Seller
@@ -9,6 +9,7 @@ from .serializers import (
     UpdateAdSerializer,
     AdCreateSerializer,
     EditAdSerializer,
+    AdUpdateDeleteSerializer,
 )
 
 
@@ -63,7 +64,12 @@ class StatusPartialUpdateView(generics.UpdateAPIView):
     queryset = Advert.objects.all()
     serializer_class = UpdateAdSerializer
     permission_classes = [IsAuthenticated, IsModerator]
-    permission_classes = [IsAuthenticated, IsModerator]
+
+
+class AdDetailDelete(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Advert.objects.all()
+    serializer_class = AdUpdateDeleteSerializer
+    permission_classes = [IsAuthenticated, IsSeller, IsOwnerAndPending]
 
 
 class CreateAd(generics.CreateAPIView):
@@ -78,3 +84,4 @@ class MyAds(generics.ListAPIView):
         queryset = Advert.objects.all().filter(ad_owner_id=user.id)
         # import pdb; pdb.set_trace()
         return queryset
+    permission_classes = [IsAuthenticated, IsSeller]

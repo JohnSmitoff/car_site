@@ -26,6 +26,12 @@ class AdCreateSerializer(serializers.ModelSerializer):
         return super(AdCreateSerializer, self).create(validated_data)
 
 
+class AdUpdateDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Advert
+        fields = ("ad_text",)
+
+
 class UpdateAdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advert
