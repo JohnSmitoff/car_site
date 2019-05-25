@@ -10,7 +10,6 @@ class ListCarsSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-
 class CreateCarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
@@ -20,3 +19,11 @@ class CreateCarSerializer(serializers.ModelSerializer):
         seller = Seller.objects.get(user__pk=self.context["request"].user.id)
         validated_data["owner"] = seller
         return super(CreateCarSerializer, self).create(validated_data)
+
+
+class UpdateCarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Car
+        fields = ("make", "model", "fuel", "car_type", "color", "picture")
+
+

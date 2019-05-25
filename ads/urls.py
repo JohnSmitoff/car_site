@@ -10,7 +10,7 @@ urlpatterns = [
     path("expired/", views.ListExpiredAds.as_view()),
     re_path(r"^moderate/(?P<pk>\d+)/$", views.StatusPartialUpdateView.as_view()),
     path("create/", views.CreateAd.as_view()),
-    path("my/", views.MyAds.as_view()),
-    re_path(r"^my/delete/(?P<pk>\d+)/$", views.AdDetailDelete.as_view()),
+    path("my_ads/", views.MyAds.as_view()),
+    re_path(r"^my_ads/delete/(?P<pk>\d+)/$", views.AdDetailDelete.as_view()),
 
 ]

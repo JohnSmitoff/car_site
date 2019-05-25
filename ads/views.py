@@ -38,7 +38,7 @@ class MethodSerializerView(object):
 
 
 class ListAds(generics.ListAPIView):
-    queryset = Advert.objects.all().filter(status="A")
+    queryset = Advert.objects.filter(status="A").order_by("-creation_date")
     serializer_class = ListAdsSerializer
 
 
@@ -84,4 +84,5 @@ class MyAds(generics.ListAPIView):
         queryset = Advert.objects.all().filter(ad_owner_id=user.id)
         # import pdb; pdb.set_trace()
         return queryset
+
     permission_classes = [IsAuthenticated, IsSeller]

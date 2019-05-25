@@ -10,9 +10,10 @@ from .enums import AdStatusEnum
 
 
 class Advert(models.Model):
-    ad_owner = models.ForeignKey(Seller, on_delete=models.CASCADE,default=Seller)
+    ad_owner = models.ForeignKey(Seller, on_delete=models.CASCADE, default=Seller)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     ad_text = models.TextField(max_length=200)
+    price = models.PositiveIntegerField(default=1)
 
     status = models.CharField(
         max_length=10,
@@ -22,4 +23,6 @@ class Advert(models.Model):
     creation_date = models.DateField()
 
     def __str__(self):
-        return f"created by {self.ad_owner} on {self.creation_date} status - {self.status}"
+        return (
+            f"created by {self.ad_owner} on {self.creation_date} status - {self.status}"
+        )

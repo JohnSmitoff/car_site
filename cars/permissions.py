@@ -26,11 +26,11 @@ class IsSeller(BasePermission):
         return False
 
 
-class IsOwnerAndPending(BasePermission):
+class IsCarOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
         #import pdb; pdb.set_trace()
         try:
             seller = Seller.objects.all().filter(user__pk=request.user.id)[0]
-            return obj.ad_owner == seller or request.user.is_superuser
+            return (obj.owner.id == seller.id ) or request.user.is_superuser
         except:
             return False
