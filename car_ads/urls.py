@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import re_path,path
+from django.contrib.sitemaps.views import sitemap
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #re_path(r'^api/v1/sitemap/$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path("api/v1/accounts/", include("accounts.urls")),
     path("api/v1/ads/", include("ads.urls")),
     path("api/v1/my_cars/", include("cars.urls")),

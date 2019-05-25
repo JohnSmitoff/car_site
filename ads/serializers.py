@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.db import models
 from .models import Advert
 from accounts.models import Seller
 
@@ -17,13 +18,19 @@ class EditAdSerializer(serializers.ModelSerializer):
 class AdCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advert
-        fields = "__all__"
+        fields = ("car", "ad_text", "price", "creation_date")
 
     def create(self, validated_data):
 
         seller = Seller.objects.get(user__pk=self.context["request"].user.id)
         validated_data["ad_owner"] = seller
+        validated_data["status"] = "P"
         return super(AdCreateSerializer, self).create(validated_data)
+
+
+class AdDetailSerializer(serializers.ModelSerializer):
+    models = Advert
+    fields = ('id',"ad_text", "price")
 
 
 class AdUpdateDeleteSerializer(serializers.ModelSerializer):

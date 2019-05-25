@@ -4,13 +4,14 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.ListAds.as_view()),
-    path("pending/", views.ListPendingAds.as_view()),
-    path("rejected/", views.ListRejectedAds.as_view()),
-    path("expired/", views.ListExpiredAds.as_view()),
+    path("", views.ListAdsView.as_view()),
+    path("pending/", views.ListPendingAdsView.as_view()),
+    path("rejected/", views.ListRejectedAdsView.as_view()),
+    path("expired/", views.ListExpiredAdsView.as_view()),
     re_path(r"^moderate/(?P<pk>\d+)/$", views.StatusPartialUpdateView.as_view()),
-    path("create/", views.CreateAd.as_view()),
-    path("my_ads/", views.MyAds.as_view()),
-    re_path(r"^my_ads/delete/(?P<pk>\d+)/$", views.AdDetailDelete.as_view()),
-
+    path("create/", views.CreateAdView.as_view()),
+    path("my_ads/", views.MyAdsView.as_view()),
+    re_path(r"^my_ads/edit/(?P<pk>\d+)/$", views.AdDetailDeleteView.as_view()),
+    re_path(r"^(?P<pk>\d+)/$", views.AdDetailView.as_view()),
+    path('top/',views.TopAdDetailView.as_view()),
 ]
