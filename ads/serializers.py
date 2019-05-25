@@ -30,13 +30,13 @@ class AdCreateSerializer(serializers.ModelSerializer):
 
 class AdDetailSerializer(serializers.ModelSerializer):
     models = Advert
-    fields = ('id',"ad_text", "price")
+    fields = ("id", "ad_text", "price")
 
 
 class AdUpdateDeleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advert
-        fields = ("ad_text",)
+        fields = ("ad_text", "price")
 
 
 class UpdateAdSerializer(serializers.ModelSerializer):
