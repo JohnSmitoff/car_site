@@ -37,13 +37,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
-
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-
+    "django.contrib.sites",
+    "django.contrib.sitemaps",
+    "rest_framework",
+    "rest_framework.authtoken",
+    "rest_auth",
+    "djcelery",
     "phonenumber_field",
     "accounts",
     "ads",
@@ -124,3 +123,12 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 PHONENUMBER_DEFAULT_REGION = "BG"
+
+BROKER_URL = "redis://127.0.0.1:6379"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+
+
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "Europe/Sofia"
