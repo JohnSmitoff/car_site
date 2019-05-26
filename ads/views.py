@@ -10,6 +10,7 @@ from .serializers import (
     UpdateAdSerializer,
     AdCreateSerializer,
     AdUpdateDeleteSerializer,
+    SellerAdsSerializer,
 )
 import pdb
 
@@ -94,7 +95,6 @@ class AdDetailView(APIView):
         try:
             ad = Advert.objects.all().filter(pk=pk)[0]
 
-
             # pdb.set_trace()
             owner = ad.ad_owner.user.username
             ad.ad_views += 1
@@ -123,7 +123,7 @@ class TopAdDetailView(APIView):
         try:
             ad = Advert.objects.all().order_by("-ad_views")[0]
 
-            #pdb.set_trace()
+            # pdb.set_trace()
             owner = ad.ad_owner.user.username
 
             return Response(
@@ -142,3 +142,18 @@ class TopAdDetailView(APIView):
             )
         except:
             return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+class BuildTriger(APIView):
+    pass
+
+
+class ListSellersAdsView(APIView):
+    def get(self, request):
+        sellers = Seller.objects.all()
+
+        serializer = SellerAdsSerializer(sellers, many=True)
+        # pdb.set_trace()
+        return Response(serializer.data)
+
+    permission_classes = [IsAuthenticated, IsModerator]

@@ -10,6 +10,11 @@ class ListAdsSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ListSellerSerializer(serializers.ModelSerializer):
+    model = Seller
+    fields = "__all__"
+
+
 class EditAdSerializer(serializers.ModelSerializer):
     model = Advert
     fields = ("ad_text", "status")
@@ -43,3 +48,19 @@ class UpdateAdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advert
         fields = ("status",)
+
+
+class AdsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Advert
+        fields = ("price", "ad_text")
+
+
+class SellerAdsSerializer(serializers.ModelSerializer):
+    adverts = AdsSerializer(many=True, read_only=True)
+
+    # import pdb pdb.set_trace()
+
+    class Meta:
+        model = Seller
+        fields = ("user", "phone_number", "adverts")

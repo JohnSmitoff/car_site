@@ -10,7 +10,7 @@ from .enums import AdStatusEnum
 
 
 class Advert(models.Model):
-    ad_owner = models.ForeignKey(Seller, on_delete=models.CASCADE, default=Seller)
+    ad_owner = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='adverts')
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     ad_text = models.TextField(max_length=200)
     price = models.PositiveIntegerField(default=1)
