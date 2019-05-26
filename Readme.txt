@@ -1,2 +1,2 @@
-WebApp for selling cars .
+RestApp for selling cars .
 
