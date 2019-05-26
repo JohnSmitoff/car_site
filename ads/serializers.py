@@ -53,7 +53,7 @@ class UpdateAdSerializer(serializers.ModelSerializer):
 class AdsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advert
-        fields = ("price", "ad_text")
+        fields = ("price", "ad_text", "car", "creation_date")
 
 
 class SellerAdsSerializer(serializers.ModelSerializer):
